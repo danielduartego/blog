@@ -5,6 +5,7 @@
   <% @comments.each do |comment| %>
   <tr>
       <td><%= comment.body %></td>
+      <td><%= link_to 'Show', comment_path(comment) %></td>
     </tr>
   <% end %>
 </table>
