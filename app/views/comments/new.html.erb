@@ -1,0 +1,14 @@
+<h2> New comment </h2>
+
+<%= form_for :comment do |f| %>
+
+  <p>
+    <%= f.label :comment %><br>
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

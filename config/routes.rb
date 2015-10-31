@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   root "home#home"
 
   get "/home" => "home#home"
-
   get "/about" => "home#about"
+
+  resources :posts
+
+  resources :comments 
 
   # resources :home
 

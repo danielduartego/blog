@@ -1,0 +1,25 @@
+<table border="1">
+  <tr>
+    <th>Comment</th>
+  </tr>
+  <% @comments.each do |comment| %>
+  <tr>
+      <td><%= comment.body %></td>
+    </tr>
+  <% end %>
+</table>
+
+<hr/>
+
+<%= form_for :comment do |f| %>
+
+  <p>
+    <%= f.label :comment %><br>
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
