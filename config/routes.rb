@@ -7,9 +7,13 @@ Rails.application.routes.draw do
   get "/home" => "home#home"
   get "/about" => "home#about"
 
-  resources :posts
+  resources :posts do
+    resources :comments
+    get(:search, {on: :collection})
+    get(:search, {on: :member})
+    get(:search)
+  end
 
-  resources :comments 
 
   # resources :home
 

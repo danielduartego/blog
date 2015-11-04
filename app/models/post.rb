@@ -7,6 +7,6 @@ class Post < ActiveRecord::Base
   validates :body, presence:   true,
                    uniqueness: {scope: :title}
 
-
+  has_many :comments, dependent: :destroy
 
 end

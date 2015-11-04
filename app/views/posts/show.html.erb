@@ -1,23 +1,38 @@
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
 
-<p>
-  <strong>Text:</strong>
-  <%= @post.body %>
-</p>
+    <h1><%= @post.title %></h1>
+    <p class="lead"><%= @post.body %></p>
+    <p class="text-right">
+    <%= link_to 'edit', edit_post_path %>
+    <%= link_to 'delete', post_path, method: :delete,
+            data: { confirm: 'Má oooee, Você está certo dissoammm? ' } %></p>
 
+    <h5> Comments </h5>
+    <hr/>
+    <% @comments.each do |comm| %>
+    <%= comm.body %>
+    <br>
+    <hr/>
+    <% end %>
 
-<% if @comment %>
-  <%= @comment.body %>
-<% end %>
+    <%= form_for [@post, @comment] do |f| %>
+      <div class="form-group">
+        <%= f.label :body, "comment" %>
+        <%= f.text_area :body, :placeholder => "post a comment!", class: "form-control", rows: "3" %>
+      </div>
+      <%= f.submit " comment ", class: "btn btn-success btn-sm btn-block"  %>
+    <% end %>
+    <div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
 
-
-
-<%= link_to 'Edit', edit_post_path %>
-<%= link_to 'Delete', post_path, method: :delete,
-        data: { confirm: 'Má oooee, Você está certo dissoammm? ' } %>
-<%= link_to 'Back', posts_path %>
-
-<hr/>
+</div>
+<div class="col-md-4"></div>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030172305) do
+ActiveRecord::Schema.define(version: 20151104061301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,9 +24,12 @@ ActiveRecord::Schema.define(version: 20151030172305) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
+    t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "email"
@@ -42,6 +45,11 @@ ActiveRecord::Schema.define(version: 20151030172305) do
     t.text     "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "comment_id"
   end
 
+  add_index "posts", ["comment_id"], name: "index_posts_on_comment_id", using: :btree
+
+  add_foreign_key "comments", "posts"
+  add_foreign_key "posts", "comments"
 end
