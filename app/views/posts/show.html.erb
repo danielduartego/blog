@@ -5,14 +5,19 @@
     <h1><%= @post.title %></h1>
     <p class="lead"><%= @post.body %></p>
     <p class="text-right">
-    <%= link_to 'edit', edit_post_path %>
+    <%= link_to 'edit', edit_post_path %> |
     <%= link_to 'delete', post_path, method: :delete,
             data: { confirm: 'Má oooee, Você está certo dissoammm? ' } %></p>
 
     <h5> Comments </h5>
     <hr/>
-    <% @comments.each do |comm| %>
+    <% @post.comments.each do |comm| %>
     <%= comm.body %>
+    <p class="text-right">
+    <%= link_to "delete", post_comment_path(@post, comm), method: :delete,
+                                                  data: {confirm: "Are you sure?"} %></p>
+
+
     <br>
     <hr/>
     <% end %>
