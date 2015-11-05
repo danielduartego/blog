@@ -7,11 +7,17 @@ Rails.application.routes.draw do
   get "/home" => "home#home"
   get "/about" => "home#about"
 
+  resources :users, only: [:new, :create]
+
+  resources :sessions, only: [:new, :create, :destroy] do
+    delete :destroy, on: :collection
+  end
+
   resources :posts do
     resources :comments
-    get(:search, {on: :collection})
-    get(:search, {on: :member})
-    get(:search)
+    # get(:search, {on: :collection})
+    # get(:search, {on: :member})
+    # get(:search)
   end
 
 
