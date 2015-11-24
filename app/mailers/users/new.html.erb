@@ -1,0 +1,27 @@
+
+  <h2><p class="text-center">sign up</p></h2>
+
+
+  <%= form_for @user do |f| %>
+    <div class="form-group">
+      <%= f.label :first_name, "what your name?" %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :last_name, "and last name?" %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, "what your email?"%>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, "create a password"%>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "repete the password" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+    <%= f.submit "create user", class: "btn btn-primary btn-sm btn-block" %>
+  <% end %>

@@ -1,0 +1,17 @@
+// preciso importar no arquivo que for usar as variaveis
+// @import "app_variables";
+// o mesmo que faço com bootstrap_and_overrides
+
+$defaut-float: right;
+$special-color: #ff0000;
+
+// craindo a uma funcao com scss.
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }

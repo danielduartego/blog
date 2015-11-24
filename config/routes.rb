@@ -2,19 +2,21 @@ Rails.application.routes.draw do
 
 
 
-  root "home#home"
+  root "posts#index"
 
   get "/home" => "home#home"
   get "/about" => "home#about"
 
-  resources :users, only: [:new, :create]
+  resources :users
 
   resources :sessions, only: [:new, :create, :destroy] do
     delete :destroy, on: :collection
   end
 
   resources :posts do
+    resources :votes, only: [:create, :destroy, :update]
     resources :comments
+    resources :likes, only: [:create, :destroy]
     # get(:search, {on: :collection})
     # get(:search, {on: :member})
     # get(:search)

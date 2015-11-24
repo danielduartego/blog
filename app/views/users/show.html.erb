@@ -1,0 +1,12 @@
+
+<br>
+<div class="text-center">
+  <% if @user.image.present? %>
+  <%= image_tag @user.image.url(:medium), class: "img-circle" %>
+  <% end %>
+</div>
+<h3 class="text-center"> <%= @user.full_name %> </h3>
+
+<% if @user == current_user %>
+<p class="text-center"><%= link_to "Edit profile", edit_user_path %></p>
+<% end %>

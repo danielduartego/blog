@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+tags = ["fashion", "photography", "food", "travel", "music", "sports"]
+
+tags.each do |tag|
+  Tag.create(name: tag)
+end
+
+print Cowsay::say("create #{tags.length} tags")

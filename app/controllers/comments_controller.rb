@@ -1,55 +1,33 @@
 class CommentsController < ApplicationController
 
-  def index
-    @comments = Comment.all.order(:created_at).reverse_order
-  end
+  before_action :authenticate_user
 
-  def new
-    @comment = Comment.new
-  end
-
-  def edit
-    @comment = Comment.find(params[:id])
-  end
-
-  def show
-    @comment = Comment.find(params[:id])
-  end
 
   def create
+    comment_params = params.require(:comment).permit(:body)
     @post = Post.find params[:post_id]
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.new(comment_params)
     @comment.post = @post
-    if @comment.save
-      redirect_to post_path(@post), notice: "Comment created successfully!"
-    else
-      render "posts/show"
+    respond_to do |format|
+      if @comment.save
+        format.html {redirect_to post_path(@post)}
+        format.js {render :create_success}
+      else
+        format.html {render "posts/show"}
+        format.js {render js: "alert('failure');"}
+      end
     end
   end
 
-
-  def update
-    @comment = Comment.find(params[:id])
-    if @comment.update(comment_params)
-      redirect_to @comment
-    else
-      render :edit
-    end
-  end
 
   def destroy
-    comment = Comment.find(params[:id])
-    comment.destroy
-    redirect_to post_path(comment.post)
-  end
-
-
-
-
-  private
-
-  def comment_params
-    params.require(:comment).permit(:body)
+    @comment = Comment.find params[:id]
+    redirect_to root_path, alert: "access denied!" unless can?(:destroy, @comment)
+    @comment.destroy
+      respond_to do |format|
+        format.html {redirect_to post_path(@comment.post), notice: "Comment deleted"}
+        format.js { render }
+      end
   end
 
 

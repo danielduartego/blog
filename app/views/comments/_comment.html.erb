@@ -1,0 +1,11 @@
+<div class="bg-comment" id="<%= dom_id(comment) %>">
+
+<%= comment.body %>
+  <p class="text-right">
+    <% if can? :destroy, comment %>
+      <%= link_to fa_icon("trash"), post_comment_path(@post, comment), method: :delete,
+                  class: "icon-comm-destroy", remote: true %>
+    <% end %>
+  </p>
+
+</div>

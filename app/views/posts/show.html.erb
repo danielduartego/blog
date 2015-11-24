@@ -1,43 +1,107 @@
-<div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
+<!-- <div class="hero">
+<div class="hero__background" ><%= image_tag @post.image.url(:post_size)%></div>
+  <h1 class="hero__title">Image Blur</h1>
+</div> -->
 
-    <h1><%= @post.title %></h1>
-    <p class="lead"><%= @post.body %></p>
-    <p class="text-right">
-    <%= link_to 'edit', edit_post_path %> |
-    <%= link_to 'delete', post_path, method: :delete,
-            data: { confirm: 'Má oooee, Você está certo dissoammm? ' } %></p>
+<!-- titulo do post -->
 
-    <h5> Comments </h5>
-    <hr/>
-    <% @post.comments.each do |comm| %>
-    <%= comm.body %>
-    <p class="text-right">
-    <%= link_to "delete", post_comment_path(@post, comm), method: :delete,
-                                                  data: {confirm: "Are you sure?"} %></p>
+<h2><%= @post.title %></h2>
+
+<!-- created by -->
+<% if @post.user %>
+  <p class="text-left">
+  <%= image_tag @post.user.image.url(:thumb), class: "img-circle" %>
+  <%= link_to @post.user.full_name, user_path(@post.user.id) %></p>
+<% end %>
+
+<!-- image -->
+<% if @post.image.present? %>
+  <%= image_tag @post.image.url(:post_size) %>
+<% end %>
 
 
-    <br>
-    <hr/>
-    <% end %>
+<!-- edit delete -->
+<p class="text-right">
+  <% if can? :edit, @post %>
+    <%= link_to fa_icon("pencil-square-o"), edit_post_path(@post), class: "icon-comm-destroy" %>
+  <% end %>
 
-    <%= form_for [@post, @comment] do |f| %>
-      <div class="form-group">
-        <%= f.label :body, "comment" %>
-        <%= f.text_area :body, :placeholder => "post a comment!", class: "form-control", rows: "3" %>
-      </div>
-      <%= f.submit " comment ", class: "btn btn-success btn-sm btn-block"  %>
-    <% end %>
-    <div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-    </div>
+  <% if can? :destroy, @post %>
+    <%= link_to fa_icon("trash"), post_path(@post), method: :delete, class: "icon-comm-destroy",
+            data: { confirm: 'Má oooee, Você está certo dissoammm? ' } %>
+  <%end%>
+</p>
 
+<!-- body -->
+<p class="lead"><%= @post.body %></p>
+
+<!-- tags -->
+<% if @post.tags.any? %>
+  tags: <% @post.tags.each do |tag| %>
+  <%= tag.name %>
+  <% end %>
+<% end %>
+
+<!-- vote button -->
+<div class="text-right">
+
+  votes: <%= @post.vote_result %>
+  <% if !user_signed_in? || !@post.voted_on_by?(current_user) %>
+    <%= link_to fa_icon("arrow-circle-up"), post_votes_path(@post,
+    {vote: {is_up: true}}), method: :post, class: "icon-vote-green text-success"%>
+    <%= link_to fa_icon("arrow-circle-down"), post_votes_path(@post,
+    {vote: {is_up: false}}), method: :post, class: "icon-vote-red text-danger"%>
+
+  <% elsif @post.vote_for(current_user).is_up? %>
+    <%= link_to fa_icon("arrow-circle-up"), post_vote_path(@post, @post.vote_for(current_user)),
+    method: :delete, class: "icon-vote-green text-success" %>
+    <%= link_to fa_icon("arrow-circle-down"), post_vote_path(@post, @post.vote_for(current_user),
+    vote: {is_up: false}), method: :delete, class: "icon-vote-red text-danger"%>
+
+  <% elsif !@post.vote_for(current_user).is_up?%>
+    <%= link_to fa_icon("arrow-circle-up"), post_vote_path(@post, @post.vote_for(current_user),
+    vote: {is_up: true}), method: :patch, class: "icon-vote-green text-success"%>
+    <%= link_to fa_icon("arrow-circle-down"), post_vote_path(@post, @post.vote_for(current_user)),
+    method: :delete, class: "icon-vote-red text-danger"%>
+
+  <% end %>
+
+
+<!-- like button  -->
+  <% if user_signed_in? && @post.liked_by?(current_user)%>
+    <%= link_to fa_icon("heart"), post_like_path(@post, @post.like_for(current_user)),
+                                  method: :delete, class: "icon-heart text-danger" %>
+  <% else %>
+    <%= link_to fa_icon("heart-o"), post_likes_path(@post),
+                                    method: :post, class: "icon-heart text-danger" %>
+  <% end %>
+    <%= @post.likes.count %>
 </div>
-<div class="col-md-4"></div>
+
+
+<!-- create comment -->
+<div class="form-group">
+  <%= form_for [@post, @comment], remote: true do |f| %>
+    <%= f.label :body, "Write a comment" %>
+    <%= f.text_area :body, class: "form-control", rows: "3" %>
+    <br>
+    <%= f.submit "Comment", class: "btn btn-primary btn-md btn-block", data: {disable_with: "Saving..."}  %>
+  <% end %>
+</div>
+
+<!-- comments -->
+<div id="comment">
+  <% @post.comments.each do |comment| %>
+    <%= render "/comments/comment", comment: comment %>
+  <% end %>
+</div>
+
+
+<div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 </div>

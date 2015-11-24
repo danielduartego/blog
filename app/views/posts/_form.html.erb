@@ -1,0 +1,28 @@
+<%= form_for @post do |f| %>
+
+  <div class="form-group">
+    <%= f.label :title, "Title"  %>
+    <%= f.text_field :title, class: "form-control"%>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :body, "Your story..." %>
+    <%= f.text_area :body, class: "form-control", rows: "7" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.collection_check_boxes :tag_ids, Tag.order(:name), :id, :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.file_field :image, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+  <%= f.submit "Post your story ", class: "btn btn-primary btn-md btn-block" %>
+  </div>
+
+
+
+  <% end %>

@@ -1,30 +1,4 @@
+<h3 class="text-center">Create your post</h3>
 
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
 
-      <%= @post.errors.full_messages.join(", ") %>
-
-      <%= form_for @post do |f| %>
-    <div class="form-group">
-
-        <div>
-          <%= f.label :title, "title"  %>
-          <%= f.text_field :title, :placeholder => "title", class: "form-control"%>
-        </div>
-
-        <div>
-          <%= f.label :body, " tell you story..." %>
-          <%= f.text_area :body, :placeholder => "tell your story...", class: "form-control", rows: "7" %>
-        </div>
-        <br>
-        <div class="form-group">
-        <%= f.submit " post your story ", class: "btn btn-success btn-sm btn-block" %>
-        </div>
-   </div>
-
-    <% end %>
-
-    </div>
-    <div class="col-md-4"></div>
-  </div>
+<%= render "form" %>
