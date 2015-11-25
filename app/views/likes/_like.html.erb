@@ -1,0 +1,8 @@
+<% if user_signed_in? && @post.liked_by?(current_user)%>
+  <%= link_to fa_icon("heart"), post_like_path(@post, @post.like_for(current_user)),
+                method: :delete, class: "if icon-heart text-danger", remote: true %>
+<% else %>
+  <%= link_to fa_icon("heart-o"), post_likes_path(@post),
+                method: :post, class: "else icon-heart text-danger", remote: true %>
+<% end %>
+  <%= @post.likes.count %> 
