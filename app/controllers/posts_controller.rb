@@ -12,7 +12,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @comments = @post.comments
     @comment = Comment.new(post: @post)
   end
@@ -39,7 +38,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to @post
     else
@@ -48,7 +46,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-  @post = Post.find(params[:id])
   @post.destroy
   redirect_to posts_path
 end
@@ -66,7 +63,7 @@ end
 
   def find_post
     # finding the question by its id
-    @post = Post.find params[:id]
+    @post = Post.friendly.find params[:id]
   end
 
 end

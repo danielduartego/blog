@@ -1,7 +1,4 @@
-<!-- <div class="hero">
-<div class="hero__background" ><%= image_tag @post.image.url(:post_size)%></div>
-  <h1 class="hero__title">Image Blur</h1>
-</div> -->
+
 
 <!-- titulo do post -->
 
@@ -11,7 +8,9 @@
 <% if @post.user %>
   <p class="text-left">
   <%= image_tag @post.user.image.url(:thumb), class: "img-circle" %>
-  <%= link_to @post.user.full_name, user_path(@post.user.id) %></p>
+  <%= link_to @post.user.full_name, user_path(@post.user.id) %>
+  <%= "@" + @post.user.created_at.strftime(" %b %d, %Y")  %>
+</p>
 <% end %>
 
 <!-- image -->
@@ -33,12 +32,12 @@
 </p>
 
 <!-- body -->
-<p class="lead"><%= @post.body %></p>
+<p class="texto"><%= @post.body %></p>
 
 <!-- tags -->
 <% if @post.tags.any? %>
-  tags: <% @post.tags.each do |tag| %>
-  <%= tag.name %>
+  <% @post.tags.each do |tag| %>
+<p class="label label-info"><%= tag.name %></p>
   <% end %>
 <% end %>
 
@@ -66,14 +65,14 @@
 
   <% end %>
 
+</div>
 
 <!-- like button  -->
 
-  <div id="like">
+  <div class="text-right" id="like">
       <%= render 'likes/like' %>
   </div>
 
-</div>
 
 
 

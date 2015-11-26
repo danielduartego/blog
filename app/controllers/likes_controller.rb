@@ -4,7 +4,7 @@ class LikesController < ApplicationController
 
   def create
     @like = Like.new
-    @post = Post.find params[:post_id]
+    @post = Post.friendly.find params[:post_id]
     @like.post = @post
     @like.user = current_user
     respond_to do |format|
@@ -21,7 +21,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @post = Post.find params[:post_id]
+    @post = Post.friendly.find params[:post_id]
     @like = current_user.likes.find params[:id]
     @like.destroy
       respond_to do |format|

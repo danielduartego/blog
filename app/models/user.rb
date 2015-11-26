@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  # extend FriendlyId
+  # friendly_id :full_name, use: :slugged
 
   def full_name
     "#{first_name} #{last_name}".strip

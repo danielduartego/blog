@@ -1,6 +1,6 @@
 .hero {
   position: absolute;
-  width: 100%;
+  width: 130%;
   height: 300px;
   padding: 2em 0;
   overflow: hidden;
@@ -11,7 +11,7 @@
     left: 0;
     width: 200%;
     /*Where the magic happens*/
-    -webkit-filter: blur(50px);
+    -webkit-filter: blur(150px);
     -webkit-transform: translate3d(0, 0, 0);
   }
   .hero__title {

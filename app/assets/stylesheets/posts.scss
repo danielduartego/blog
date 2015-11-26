@@ -1,14 +1,30 @@
 @import "app_variables";
 
-h2 {
+h1 {
   color: darken($special-color, 100%);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 40px;
+}
+
+h2 {
+  color: darken($special-color, 80%);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 30px;
 }
 
 
 h4 {
   color: darken($special-color, 40%);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.texto {
+  font-size: 20px;
+  font-family: 'Lora', serif;
+}
+
+.nave {
+  position: fixed;
 }
 
 .post-background {
@@ -26,4 +42,6 @@ h4 {
   background-color: #f0f0f0;
   border-radius: 5px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 17px;
 }

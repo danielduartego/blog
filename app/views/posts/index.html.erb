@@ -4,18 +4,20 @@
 
     <tr>
       <td>
-        <h2><%= link_to post.title, post_path(post) %></h2>
+        <h1><%= link_to post.title, post_path(post) %></h1>
 
         <% if post.user %>
           <p class="text-left">
             <%= link_to (image_tag post.user.image.url(:thumb), class: "img-circle"), user_path(post.user.id) %>
-            <%= link_to post.user.full_name, user_path(post.user.id)%>  </p>
+            <%= link_to post.user.full_name, user_path(post.user.id)%>
+            <%= "@" + post.user.created_at.strftime(" %b %d, %Y")  %>
+          </p>
         <% end %>
 
         <% if post.image.present? %>
           <%= link_to (image_tag post.image.url(:post_size)), post_path(post)%>
         <% end %>
-        <p class="lead"><%= post.body.truncate(100) %></p>
+        <p class="texto"><%= post.body.truncate(150) %></p>
         <hr/>
       </td>
     </tr>

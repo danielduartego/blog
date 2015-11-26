@@ -22,6 +22,9 @@ class Post < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
 
   def liked_by?(user)
     like_for(user).present?

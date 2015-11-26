@@ -1,3 +1,6 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
   <%= form_for @user do |f| %>
     <div class="form-group">
       <%= f.label :first_name, "what your name?" %>
@@ -24,3 +27,6 @@
     </div>
     <%= f.submit "create user", class: "btn btn-primary btn-sm btn-block" %>
   <% end %>
+    </div>
+    <div class="col-md-3"></div>
+</div>

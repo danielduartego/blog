@@ -1,0 +1,54 @@
+.navbar-custom {
+   background: transparent;
+   border-bottom: 1px solid transparent;
+ }
+ .navbar-custom .navbar-brand {
+   color: white;
+   padding: 20px;
+ }
+ .navbar-custom .navbar-brand:hover,
+ .navbar-custom .navbar-brand:focus {
+   color: rgba(255, 255, 255, 0.8);
+ }
+ .navbar-custom .nav li a {
+   color: white;
+   padding: 20px;
+ }
+ .navbar-custom .nav li a:hover,
+ .navbar-custom .nav li a:focus {
+   /*color: rgba(255, 255, 255, 0.8);*/
+   color: #fed136;
+ }
+​
+/* custom nav-bar with fixed position */
+ .navbar-custom.is-fixed {
+   position: fixed;
+   top: -61px;
+   background-color: rgba(255, 255, 255, 0.9);
+   border-bottom: 1px solid #f2f2f2;
+   -webkit-transition: -webkit-transform 0.3s;
+   -moz-transition: -moz-transform 0.3s;
+   transition: transform 0.3s;
+ }
+ .navbar-custom.is-fixed .navbar-brand {
+   color: #404040;
+ }
+ .navbar-custom.is-fixed .navbar-brand:hover,
+ .navbar-custom.is-fixed .navbar-brand:focus {
+   color: #0085a1;
+ }
+ .navbar-custom.is-fixed .nav li a {
+   color: #404040;
+ }
+ .navbar-custom.is-fixed .nav li a:hover,
+ .navbar-custom.is-fixed .nav li a:focus {
+   color: #0085a1;
+ }
+ .navbar-custom.is-visible {
+   /* if the user changes the scrolling direction, we show the header */
+   -webkit-transform: translate3d(0, 100%, 0);
+   -moz-transform: translate3d(0, 100%, 0);
+   -ms-transform: translate3d(0, 100%, 0);
+   -o-transform: translate3d(0, 100%, 0);
+   transform: translate3d(0, 100%, 0);
+ }

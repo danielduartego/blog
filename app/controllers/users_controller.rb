@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
       if @user.save
+        UsersMailer.notify_new_user(User.last).deliver_now
         session[:user_id] = @user.id
         redirect_to root_path
       else
@@ -16,10 +17,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
+    @posts = @user.posts
+    # .friendly
   end
 
   def edit
-    # redirect_to root_path, alert: "Access denied." unless can? :edit, @user
+    #redirect_to root_path, alert: "Access denied." unless can? :edit, @user
     @user = current_user
   end
 
