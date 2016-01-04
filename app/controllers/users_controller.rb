@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
       if @user.save
-        UsersMailer.notify_new_user(User.last).deliver_now
+        #UsersMailer.notify_new_user(User.last).deliver_now
         session[:user_id] = @user.id
         redirect_to root_path
       else

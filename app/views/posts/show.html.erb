@@ -45,6 +45,7 @@
 <div class="text-right">
 
   votes: <%= @post.vote_result %>
+  
   <% if !user_signed_in? || !@post.voted_on_by?(current_user) %>
     <%= link_to fa_icon("arrow-circle-up"), post_votes_path(@post,
     {vote: {is_up: true}}), method: :post, class: "icon-vote-green text-success"%>

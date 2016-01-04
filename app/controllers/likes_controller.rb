@@ -14,8 +14,8 @@ class LikesController < ApplicationController
         format.html {redirect_to post_path(post)}
         format.js {render :create_success}
       else
-        format.html {redirect_to post_path(post), alert: "you can't like"}
-        format.js {render js: "alert('can not like');"}
+        format.html {redirect_to post_path(post), alert: "you can't like your on post"}
+        format.js {render js: "alert(you can't like your on post);"}
       end
     end
   end

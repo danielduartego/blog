@@ -1,6 +1,12 @@
 <div class="bg-comment" id="<%= dom_id(comment) %>">
 
-<%= comment.body %>
+<% if comment.user %>
+  <p class="text-left">
+    <%= link_to (image_tag comment.user.image.url(:thumb), class: "img-circle"), user_path(comment.user.id)%>
+    <%= link_to (comment.user.full_name), user_path(comment.user.id)%>
+    <%= "@" + comment.user.created_at.strftime(" %b %d, %Y")  %>
+
+<% end %>
   <p class="text-right">
     <% if can? :destroy, comment %>
       <%= link_to fa_icon("trash"), post_comment_path(@post, comment), method: :delete,
@@ -8,4 +14,5 @@
     <% end %>
   </p>
 
+  <%= comment.body %>
 </div>
